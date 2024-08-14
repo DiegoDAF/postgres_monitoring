@@ -1,0 +1,7 @@
+## Networking
+networks:                                                             ##  \   this network is to be sure, 
+  localprom:                                                          ##   |  all out dockers can talk  
+    driver: bridge                                                    ##  /   internally
+ 
+
+  

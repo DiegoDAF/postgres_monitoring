@@ -1,0 +1,18 @@
+services:
+  pgexp-disruptrw:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pgexp-disruptrw
+    restart: unless-stopped
+    networks:
+      - localprom
+    ports:
+      - 9188:9188
+    secrets:
+      - disruptrw_uri
+    entrypoint: sh -c "export DATA_SOURCE_NAME=$(cat /run/secrets/disruptrw_uri) && exec postgres_exporter --web.listen-address=:9188 --exclude-databases=template0,template1,rdsadmin" 
+    links:
+      - prometheus
+  
+secrets:
+  disruptrw_uri:
+    file: ./../secrets/disruptrw.conn

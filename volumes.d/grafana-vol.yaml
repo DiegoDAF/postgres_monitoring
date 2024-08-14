@@ -1,0 +1,6 @@
+## Volumenes
+volumes:
+  grafana-data:                                                       ## same for grafana volume  
+    external: true                                                    ## creating using: 
+    name: grafana-data                                                ##  docker volume create prometheus-data
+

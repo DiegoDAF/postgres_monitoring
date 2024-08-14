@@ -1,0 +1,18 @@
+services:
+  pgexp-apollo-acquisitions-ro:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pgexp-apollo-acquisitions-ro
+    restart: unless-stopped
+    networks:
+      - localprom
+    ports:
+      - 9190:9190
+    secrets:
+      - apollo-acquisitions-ro_uri
+    entrypoint: sh -c "export DATA_SOURCE_NAME=$(cat /run/secrets/apollo-acquisitions_uri) && exec postgres_exporter --web.listen-address=:9190 --exclude-databases=template0,template1,rdsadmin" 
+    links:
+      - prometheus
+  
+secrets:
+  apollo-acquisitions-ro_uri:
+    file: ./../secrets/apollo-acquisitions-ro.conn

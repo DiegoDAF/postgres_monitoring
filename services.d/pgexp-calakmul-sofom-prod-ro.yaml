@@ -1,0 +1,18 @@
+services:
+  pgexp-calakmul-sofom-prod-ro:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pgexp-calakmul-sofom-prod-ro
+    restart: unless-stopped
+    networks:
+      - localprom
+    ports:
+      - 9194:9194
+    secrets:
+      - calakmul-sofom-prod-ro_uri
+    entrypoint: sh -c "export DATA_SOURCE_NAME=$(cat /run/secrets/calakmul-sofisofompo-prod-ro_uri) && exec postgres_exporter --web.listen-address=:9194 --exclude-databases=template0,template1,rdsadmin" 
+    links:
+      - prometheus
+  
+secrets:
+  calakmul-sofom-prod-ro_uri:
+    file: ./../secrets/calakmul-sofom-prod-ro.conn

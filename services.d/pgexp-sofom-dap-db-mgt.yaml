@@ -1,0 +1,18 @@
+services:
+  pgexp-sofom-dap-db-mgt:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pgexp-sofom-dap-db-mgt
+    restart: unless-stopped
+    networks:
+      - localprom
+    ports:
+      - 9202:9202
+    secrets:
+      - sofom-dap-db-mgt_uri
+    entrypoint: sh -c "export DATA_SOURCE_NAME=$(cat /run/secrets/sofom-dap-db-mgt_uri) && exec postgres_exporter --web.listen-address=:9202 --exclude-databases=template0,template1,rdsadmin" 
+    links:
+      - prometheus
+  
+secrets:
+  sofom-dap-db-mgt_uri:
+    file: ./../secrets/sofom-dap-db-mgt.conn

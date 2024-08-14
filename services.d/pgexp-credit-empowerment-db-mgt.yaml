@@ -1,0 +1,18 @@
+services:
+  pgexp-credit-empowerment-db-mgt:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pgexp-credit-empowerment-db-mgt
+    restart: unless-stopped
+    networks:
+      - localprom
+    ports:
+      - 9200:9200
+    secrets:
+      - credit-empowerment-db-mgt_uri
+    entrypoint: sh -c "export DATA_SOURCE_NAME=$(cat /run/secrets/credit-empowerment-db-mgt_uri) && exec postgres_exporter --web.listen-address=:9200 --exclude-databases=template0,template1,rdsadmin" 
+    links:
+      - prometheus
+  
+secrets:
+  credit-empowerment-db-mgt_uri:
+    file: ./../secrets/credit-empowerment-db-mgt.conn

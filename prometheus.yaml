@@ -1,0 +1,56 @@
+#version: '3'                                                         ## we don't need this anymore
+
+##
+##   I will load everything from separated individual files.
+##
+
+include:
+  - ./network.d/localprom.yaml                                        ## Network config
+  - ./volumes.d/grafana-vol.yaml                                      ## Disk for Grafana data
+  - ./volumes.d/prometheus-vol.yaml                                   ## Disk for Prometheus data
+
+  - ./services.d/pgexp-calakmul-sofipo-prod.yaml                      ## pgExporter service
+  - ./services.d/pgexp-calakmul-sofipo-prod-ro.yaml                   ## pgExporter service
+  - ./services.d/pgexp-apollo-acquisitions.yaml                       ## pgExporter service
+  - ./services.d/pgexp-apollo-acquisitions-ro.yaml                    ## pgExporter service
+  - ./services.d/pgexp-disruptrw.yaml                                 ## pgExporter service
+  - ./services.d/pgexp-disruptrw-ro.yaml                              ## pgExporter service
+  - ./services.d/pgexp-beta.yaml                                      ## pgExporter service
+  - ./services.d/pgexp-calakmul-sofom-prod.yaml                       ## pgExporter service
+  - ./services.d/pgexp-calakmul-sofom-prod-ro.yaml                    ## pgExporter service
+  - ./services.d/pgexp-sofipo-turbo-prod.yaml                         ## pgExporter service
+  - ./services.d/pgexp-sofipo-turbo-prod-ro.yaml                      ## pgExporter service
+  - ./services.d/pgexp-apollo-db.yaml                                 ## pgExporter service
+  - ./services.d/pgexp-apollo-db-ro.yaml                              ## pgExporter service
+  - ./services.d/pgexp-credit-empowerment-db-mgt.yaml                 ## pgExporter service
+  - ./services.d/pgexp-credit-empowerment-db-mgt-ro.yaml              ## pgExporter service
+  - ./services.d/pgexp-sofom-dap-db-mgt.yaml                          ## pgExporter service
+  - ./services.d/pgexp-sofom-dap-db-mgt-ro.yaml                       ## pgExporter service
+  
+    
+  - ./services.d/node_exporter.yaml                                   ## localHost service
+  - ./services.d/cadvisor.yaml                                        ## Container Advisor service
+  - ./services.d/grafana.yaml                                         ## Grafana service
+  - ./services.d/prometheus.yaml                                      ## Prometheus service
+
+    
+## TO DO.
+
+  # alert-manager:
+  #   image: prom/alertmanager
+  #   container_name: Alertalert-manager
+  #   restart: unless-stopped    
+  #   volumes:
+  #     - ./config/:/etc/alertmanager/
+  #     - ./alertmanager.yaml:/alertmanager/alertmanager.yml"
+  #   networks:
+  #     - localprom
+  #   ports:
+  #     - 9093:9093
+  #   command:
+  #     - '-config.file=/etc/alertmanager/alretmanager.yaml' #Adapted
+  #     - '-storage.path=/alertmanager'
+
+    
+
+

@@ -1,0 +1,20 @@
+services:
+  pgexp-beta:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pgexp-beta
+    restart: unless-stopped
+    volumes:
+      - ./config/custom-sql-queries.yaml:/custom-sql-queries.yml:ro"
+    networks:
+      - localprom
+    ports:
+      - 9187:9187
+    secrets:
+      - beta_uri
+    entrypoint: sh -c "export DATA_SOURCE_NAME=$(cat /run/secrets/beta_uri) && exec postgres_exporter --web.listen-address=:9187 --exclude-databases=template0,template1,rdsadmin"
+    links:
+      - prometheus
+  
+secrets:
+  beta_uri:
+    file: ./../secrets/beta.conn

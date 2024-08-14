@@ -1,0 +1,9 @@
+## Volumenes
+volumes:
+  prometheus-data:                                                    ## this is the volume fo the prometheus
+    external: true                                                    ## data, is marked as external to prevent
+    name: prometheus-data                                             ## drop and lost the saved information
+  grafana-data:                                                       ## same for grafana volume  
+    external: true                                                    ## creating using: 
+    name: grafana-data                                                ##  docker volume create prometheus-data
+

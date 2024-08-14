@@ -1,0 +1,30 @@
+services:
+  ## GRAFA  
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_LOG_LEVEL=debug
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_USER=diego.feito@storicard.com
+      - GF_SMTP_PASSWORD=whqdeahgcaacgcff
+      - GF_SMTP_SKIP_VERIFY=false
+      - GF_SMTP_FROM_NAME=grafana
+      - GF_SMTP_FROM_ADDRESS=diego.feito@storicard.com
+      - GF_SERVER_ROOT_URL=http://beta.tigris-trout.ts.net:3000
+      - GF_ENABLE_GZIP=true
+
+  #      -e "GF_AWS_PROFILES=default" \
+  # -e "GF_AWS_default_ACCESS_KEY_ID__FILE=/run/secrets/aws_access_key_id" \
+  # -e "GF_AWS_default_SECRET_ACCESS_KEY__FILE=/run/secrets/aws_secret_access_key" \
+  # -e "GF_AWS_default_REGION__FILE=/run/secrets/aws_region" \
+        
+    networks:
+      - localprom
+    ports:
+      - '3000:3000'

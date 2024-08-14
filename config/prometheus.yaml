@@ -1,0 +1,127 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node_exporter:9100']
+        labels:
+          instance: ne-beta-tigris
+          name: ne-beta-tigris2
+          alias: ne-beta
+
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          instance: cadvisor-beta-tigris
+          name: cadvisor-beta-tigris2
+          alias: cadvisor-beta
+
+  - job_name: pgexp-prod
+    static_configs:
+    
+      - targets: ["pgexp-beta:9187"]
+        labels:
+          instance: beta-tigris
+          name: beta-tigris2
+          alias: beta
+
+      - targets: ["pgexp-disruptrw:9188"]
+        labels:
+          instance: aurora-disrupt-postgres-prod
+          name: aurora-disrupt-postgres-prod2
+          alias: disruptrw
+
+      - targets: ["pgexp-apollo-acquisitions:9189"]
+        labels:
+          instance: apollo-acquisitions
+          name: apollo-acquisitions2
+          alias: apollo-acquisitions
+      
+      - targets: ["pgexp-apollo-acquisitions-ro:9190"]
+        labels:
+          instance: apollo-acquisitions-ro
+          name: apollo-acquisitions-ro2
+          alias: apollo-acquisitions-ro
+      
+      - targets: ["pgexp-calakmul-sofipo-prod:9191"]
+        labels:
+          instance: pgexp-calakmul-sofipo-prod
+          name: pgexp-calakmul-sofipo-prod
+          alias: pgexp-calakmul-sofipo-prod
+      
+      - targets: ["pgexp-calakmul-sofipo-prod-ro:9192"]
+        labels:
+          instance: pgexp-calakmul-sofipo-prod-ro
+          name: pgexp-calakmul-sofipo-prod-ro
+          alias: pgexp-calakmul-sofipo-prod-ro
+      
+      - targets: ["pgexp-calakmul-sofom-prod:9193"]
+        labels:
+          instance: pgexp-calakmul-sofom-prod
+          name: pgexp-calakmul-sofom-prod
+          alias: pgexp-calakmul-sofom-prod
+
+      - targets: ["pgexp-calakmul-sofom-prod-ro:9194"]
+        labels:
+          instance: pgexp-calakmul-sofom-prod-ro
+          name: pgexp-calakmul-sofom-prod-ro
+          alias: pgexp-calakmul-sofom-prod-ro
+      
+      - targets: ["pgexp-disruptrw-ro:9195"]
+        labels:
+          instance: aurora-disrupt-postgres-prod-ro
+          name: aurora-disrupt-postgres-prod-ro2
+          alias: disruptrw-ro
+
+      - targets: ["pgexp-sofipo-turbo-prod:9196"]
+        labels:
+          instance: pgexp-sofipo-turbo-prod
+          name: pgexp-sofipo-turbo-prod2
+          alias: pgexp-sofipo-turbo-prod
+      
+      - targets: ["pgexp-sofipo-turbo-prod-ro:9197"]
+        labels:
+          instance: pgexp-sofipo-turbo-prod-ro
+          name: pgexp-sofipo-turbo-prod-ro2
+          alias: pgexp-sofipo-turbo-prod-ro
+      
+      - targets: ["pgexp-apollo-db:9198"]
+        labels:
+          instance: pgexp-apollo-db
+          name: pgexp-apollo-db2
+          alias: pgexp-apollo-db
+      
+      - targets: ["pgexp-apollo-db-ro:9199"]
+        labels:
+          instance: pgexp-apollo-db-ro
+          name: pgexp-apollo-db-ro2
+          alias: pgexp-apollo-db-ro
+
+      - targets: ["pgexp-credit-empowerment-db-mgt:9200"]
+        labels:
+          instance: pgexp-credit-empowerment-db-mgt
+          name: pgexp-credit-empowerment-db-mgt2
+          alias: pgexp-credit-empowerment-db-mgt
+      
+      - targets: ["pgexp-credit-empowerment-db-mgt-ro:9201"]
+        labels:
+          instance: pgexp-credit-empowerment-db-mgt-ro
+          name: pgexp-credit-empowerment-db-mgt-ro2
+          alias: pgexp-credit-empowerment-db-mgt-ro
+
+      - targets: ["pgexp-sofom-dap-db-mgt:9202"]
+        labels:
+          instance: pgexp-sofom-dap-db-mgt
+          name: pgexp-sofom-dap-db-mgt2
+          alias: pgexp-sofom-dap-db-mgt
+      
+      - targets: ["pgexp-sofom-dap-db-mgt-ro:9203"]
+        labels:
+          instance: pgexp-sofom-dap-db-mgt-ro
+          name: pgexp-sofom-dap-db-mgt-ro2
+          alias: pgexp-sofom-dap-db-mgt-ro
+
+          

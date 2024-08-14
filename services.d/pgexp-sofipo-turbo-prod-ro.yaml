@@ -1,0 +1,18 @@
+services:
+  pgexp-sofipo-turbo-prod-ro:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: pgexp-sofipo-turbo-prod-ro
+    restart: unless-stopped
+    networks:
+      - localprom
+    ports:
+      - 9197:9197
+    secrets:
+      - sofipo-turbo-prod-ro_uri
+    entrypoint: sh -c "export DATA_SOURCE_NAME=$(cat /run/secrets/sofipo-turbo-prod-ro_uri) && exec postgres_exporter --web.listen-address=:9197 --exclude-databases=template0,template1,rdsadmin" 
+    links:
+      - prometheus
+  
+secrets:
+  sofipo-turbo-prod-ro_uri:
+    file: ./../secrets/sofipo-turbo-prod-ro.conn
