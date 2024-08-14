@@ -7,24 +7,31 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_LOG_LEVEL=debug
-      - GF_SMTP_ENABLED=true
-      - GF_SMTP_HOST=smtp.gmail.com:587
-      - GF_SMTP_USER=
-      - GF_SMTP_PASSWORD=
-      - GF_SMTP_SKIP_VERIFY=false
-      - GF_SMTP_FROM_NAME=grafana
-      - GF_SMTP_FROM_ADDRESS=
       - GF_SERVER_ROOT_URL=http://beta.tigris-trout.ts.net:3000
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SMTP_ENABLED=true
       - GF_ENABLE_GZIP=true
+      - GF_LOG_LEVEL=debug
+      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_USER__FILE=/run/secrets/smtp_user
+      - GF_SMTP_PASSWORD__FILE=/run/secrets/smtp_password
+      - GF_SMTP_SKIP_VERIFY=false
+      - GF_SMTP_FROM_NAME=GRaFana
+      - GF_SMTP_FROM_ADDRESS=
 
-  #      -e "GF_AWS_PROFILES=default" \
-  # -e "GF_AWS_default_ACCESS_KEY_ID__FILE=/run/secrets/aws_access_key_id" \
-  # -e "GF_AWS_default_SECRET_ACCESS_KEY__FILE=/run/secrets/aws_secret_access_key" \
-  # -e "GF_AWS_default_REGION__FILE=/run/secrets/aws_region" \
+    secrets:
+      - smtp_user
+      - smtp_password
         
     networks:
       - localprom
     ports:
       - '3000:3000'
+
+secrets:
+  smtp_user:
+    file: ./../secrets/smtp_user.conn
+  smtp_password:
+    file: ./../secrets/smtp_password.conn
+
+
