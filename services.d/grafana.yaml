@@ -11,11 +11,11 @@ services:
       - GF_LOG_LEVEL=debug
       - GF_SMTP_ENABLED=true
       - GF_SMTP_HOST=smtp.gmail.com:587
-      - GF_SMTP_USER=diego.feito@storicard.com
-      - GF_SMTP_PASSWORD=whqdeahgcaacgcff
+      - GF_SMTP_USER=
+      - GF_SMTP_PASSWORD=
       - GF_SMTP_SKIP_VERIFY=false
       - GF_SMTP_FROM_NAME=grafana
-      - GF_SMTP_FROM_ADDRESS=diego.feito@storicard.com
+      - GF_SMTP_FROM_ADDRESS=
       - GF_SERVER_ROOT_URL=http://beta.tigris-trout.ts.net:3000
       - GF_ENABLE_GZIP=true
 
