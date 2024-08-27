@@ -27,29 +27,13 @@ include:
   - ./services.d/pgexp-sofom-dap-db-mgt.yaml                          ## pgExporter service
   - ./services.d/pgexp-sofom-dap-db-mgt-ro.yaml                       ## pgExporter service
   
-    
+  - ./services.d/alertmanager.yaml                                    ## Prometheus service  
   - ./services.d/node_exporter.yaml                                   ## localHost service
   - ./services.d/cadvisor.yaml                                        ## Container Advisor service
   - ./services.d/grafana.yaml                                         ## Grafana service
   - ./services.d/prometheus.yaml                                      ## Prometheus service
 
     
-## TO DO.
-
-  # alert-manager:
-  #   image: prom/alertmanager
-  #   container_name: Alertalert-manager
-  #   restart: unless-stopped    
-  #   volumes:
-  #     - ./config/:/etc/alertmanager/
-  #     - ./alertmanager.yaml:/alertmanager/alertmanager.yml"
-  #   networks:
-  #     - localprom
-  #   ports:
-  #     - 9093:9093
-  #   command:
-  #     - '-config.file=/etc/alertmanager/alretmanager.yaml' #Adapted
-  #     - '-storage.path=/alertmanager'
 
     
 

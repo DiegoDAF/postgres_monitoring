@@ -1,0 +1,23 @@
+# apiVersion: 1
+
+# contactPoints:
+#   - orgId: 1
+#     name: cp_1
+#     receivers:
+#       - uid: first_uid
+#         type: telegram
+#         settings:
+#           bottoken: xxx
+#           chatid: some_chat_id
+#           message: |
+#             {{ template "default.message" . }} 
+
+#       secrets:
+#         - telegram_chat_id
+#         - telegram_bot_token         
+
+# secrets:
+#   telegram_chat_id:
+#     file: ./../../../secrets/telegram-chat-id.conn
+#   telegram_bot_token:
+#     file: ./../../../secrets/telegram-bot-token.conn

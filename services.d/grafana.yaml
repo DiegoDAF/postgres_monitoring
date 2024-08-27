@@ -1,3 +1,7 @@
+##
+## TO DO
+## CONFIG TELEGRAM
+
 services:
   ## GRAFA  
   grafana:
@@ -5,24 +9,40 @@ services:
     container_name: grafana
     restart: unless-stopped
     volumes:
-      - grafana-data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana                                    ## General data location
+      - ./../config/grafana.conf.d:/etc/grafana/provisioning             ## Where the dashboards and datasources are located
+      
     environment:
-      - GF_SERVER_ROOT_URL=http://beta.tigris-trout.ts.net:3000
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      # GENERAL
+      - GF_SERVER_ROOT_URL=http://beta.tigris-trout.ts.net:3000         ## Local domain, to add in the messages
+      - GF_SECURITY_ADMIN_PASSWORD=admin                                ## default user and password
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_EMAIL=diegodaf@gmail.com                      ## default admin email addresss          
+      - GF_LOG_LEVEL=debug
+      # dashboard
+      - GF_DASHBOARDS_MIN_REFRESH_INTERVAL=5s                           ## just to prevent overheat
+        ## default dashboard path, from provisioning folder, mapped, etc
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/dashboardList/pg1-9628.json
+      # style
+      - GF_USERS_DEFAULT_THEME=dark                                    ## to prevent bugs
+      - GF_USERS_DEFAULT_LANGUAGE = en-US
+      # Conectate al prometeus via internal docker name
+      - GF_DATASOURCES__prometheus__url=http://prometheus:9090         ## to connect the prometheus docker
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+      # EMAIL settings to use gmail to send the alerts
       - GF_SMTP_ENABLED=true
       - GF_ENABLE_GZIP=true
-      - GF_LOG_LEVEL=debug
       - GF_SMTP_HOST=smtp.gmail.com:587
       - GF_SMTP_USER__FILE=/run/secrets/smtp_user
       - GF_SMTP_PASSWORD__FILE=/run/secrets/smtp_password
       - GF_SMTP_SKIP_VERIFY=false
       - GF_SMTP_FROM_NAME=GRaFana
-      - GF_SMTP_FROM_ADDRESS=
 
     secrets:
       - smtp_user
       - smtp_password
-        
+    links:
+      - prometheus
     networks:
       - localprom
     ports:

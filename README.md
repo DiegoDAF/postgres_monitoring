@@ -9,3 +9,13 @@
                     |___/                                                            |___/ 
 ```
 
+## **Side project to monitor PostgreSQL databases like I like.**
+
+The idea is:
+- Runnable in Docker
+- Keep it simple
+
+Made with Docker Compose
+
+ 
+

@@ -1,0 +1,15 @@
+services:
+  alert-manager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    restart: unless-stopped    
+    volumes:
+      - ./../config/:/etc/alertmanager/
+      - ./../config/alertmanager.yaml:/alertmanager/alertmanager.yml"
+    networks:
+      - localprom
+    ports:
+      - 9093:9093
+    command:
+      - '--config.file=/etc/alertmanager/alretmanager.yaml' #Adapted
+      - '--storage.path=/alertmanager'
